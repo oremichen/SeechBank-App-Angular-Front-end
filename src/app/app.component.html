@@ -1,0 +1,74 @@
+  <!--begin::Container-->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" style="color: aliceblue;">
+    <div class="container">
+      <a class="navbar-brand">Seech <strong>Bank</strong></a>
+      
+      <div>
+         $ {{totalAmount}}  
+      </div>
+
+      <div class="btn-group">
+        <!-- <img src="{{'./assets/users.png'}}" alt="{{name}}" id="img"> -->
+        <h4>John Doe</h4>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="container" style="margin-top: 80px;">
+    <div>
+      <form #addTransaction="ngForm" (ngSubmit)="createTransaction()"> 
+      
+        <!-- Text input -->
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">$</span>
+          </div>
+          <input type="number"  class="form-control" placeholder="Amount" 
+          [(ngModel)]="transactionDto.amount" id="amount" name="amount" required/>
+        </div>
+      
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+          <input type="text"  class="form-control" placeholder="Recipient" 
+          [(ngModel)]="transactionDto.recepient"  id="recipient" name="recipient" required/>
+        </div>
+      
+        <!-- Number input -->
+        <div class="form-outline mb-4">
+          <input type="text"  class="form-control" placeholder="Description"
+          [(ngModel)]="transactionDto.description" id="description" name="description" required/>
+        </div>
+      
+        
+        <!-- Submit button -->
+        <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary block" [disabled]="!addTransaction.form.valid">Confirm</button>
+        </div>
+
+        <hr style="margin-top: 50px;" *ngIf="transaction.length > 0">
+
+        <form style="margin-top: 50px;" *ngIf="transaction.length > 0">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchWord"
+            (keyup)="loadServices()"  id="Search" name="Search">
+          </div>
+        </form>
+
+        <table class="table table-striped" style="margin-top: 50px;" *ngIf="transaction.length > 0" >
+          <tbody>
+          <tr *ngFor="let item of transactionList">
+            <td align="left">
+              <i class="fa fa-user mr-10"></i>&nbsp;&nbsp;
+              <span><strong>{{item.recepient}}</strong></span>
+            </td>
+            <td align="right">$ {{item.amount}}</td>
+          </tr>
+          </tbody>
+        </table>
+        
+      </form>
+     </div>
+  </div>
+
+
+
